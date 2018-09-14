@@ -11839,10 +11839,10 @@ div#notebook {
      <span class="p">[</span><span class="mi">3</span><span class="p">]]</span>
 
 <span class="c1">#TODO 创建一个 4*4 单位矩阵</span>
-<span class="n">I</span> <span class="o">=</span> <span class="p">[[</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">4</span><span class="p">],</span> 
-     <span class="p">[</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">5</span><span class="p">],</span> 
-     <span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">5</span><span class="p">,</span><span class="mi">6</span><span class="p">],</span>
-     <span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">5</span><span class="p">,</span><span class="mi">7</span><span class="p">]]</span>
+<span class="n">I</span> <span class="o">=</span> <span class="p">[[</span><span class="mi">1</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">],</span> 
+     <span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">],</span> 
+     <span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">0</span><span class="p">],</span>
+     <span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">]]</span>
 
 <span class="nb">len</span><span class="p">(</span><span class="nb">tuple</span><span class="p">(</span><span class="nb">zip</span><span class="p">(</span><span class="o">*</span><span class="n">I</span><span class="p">)))</span>
 </pre></div>
@@ -11920,7 +11920,7 @@ div#notebook {
 <div class="output_subarea output_stream output_stderr output_text">
 <pre>.
 ----------------------------------------------------------------------
-Ran 1 test in 0.000s
+Ran 1 test in 0.006s
 
 OK
 </pre>
@@ -11983,7 +11983,7 @@ OK
 <div class="output_subarea output_stream output_stderr output_text">
 <pre>.
 ----------------------------------------------------------------------
-Ran 1 test in 0.000s
+Ran 1 test in 0.014s
 
 OK
 </pre>
@@ -12009,11 +12009,7 @@ OK
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># DONE 计算矩阵的转置</span>
 <span class="k">def</span> <span class="nf">transpose</span><span class="p">(</span><span class="n">M</span><span class="p">):</span>
-    <span class="n">a</span> <span class="o">=</span> <span class="p">[[]</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">M</span><span class="p">[</span><span class="mi">0</span><span class="p">]]</span>
-    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">M</span><span class="p">:</span>
-        <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">i</span><span class="p">)):</span>
-            <span class="n">a</span><span class="p">[</span><span class="n">j</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">i</span><span class="p">[</span><span class="n">j</span><span class="p">])</span>
-    <span class="k">return</span> <span class="n">a</span>
+    <span class="k">return</span> <span class="p">[</span><span class="nb">list</span><span class="p">(</span><span class="n">col</span><span class="p">)</span> <span class="k">for</span> <span class="n">col</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="o">*</span><span class="n">M</span><span class="p">)]</span>
 </pre></div>
 
 </div>
@@ -12046,7 +12042,7 @@ OK
 <div class="output_subarea output_stream output_stderr output_text">
 <pre>.
 ----------------------------------------------------------------------
-Ran 1 test in 0.016s
+Ran 1 test in 0.006s
 
 OK
 </pre>
@@ -12117,7 +12113,7 @@ OK
 <div class="output_subarea output_stream output_stderr output_text">
 <pre>.
 ----------------------------------------------------------------------
-Ran 1 test in 0.062s
+Ran 1 test in 0.047s
 
 OK
 </pre>
@@ -12163,12 +12159,7 @@ OK
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># TODO 构造增广矩阵，假设A，b行数相同</span>
 <span class="k">def</span> <span class="nf">augmentMatrix</span><span class="p">(</span><span class="n">A</span><span class="p">,</span> <span class="n">b</span><span class="p">):</span>
-    <span class="n">result</span> <span class="o">=</span> <span class="nb">list</span><span class="p">()</span>
-    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">shape</span><span class="p">(</span><span class="n">A</span><span class="p">)[</span><span class="mi">0</span><span class="p">]):</span>
-        <span class="n">row</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">A</span><span class="p">[</span><span class="n">i</span><span class="p">])</span>
-        <span class="n">row</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">b</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="mi">0</span><span class="p">])</span>
-        <span class="n">result</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">row</span><span class="p">)</span>
-    <span class="k">return</span> <span class="n">result</span>
+    <span class="k">return</span> <span class="p">[</span><span class="n">ra</span> <span class="o">+</span> <span class="n">rb</span> <span class="k">for</span> <span class="n">ra</span><span class="p">,</span> <span class="n">rb</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">A</span><span class="p">,</span> <span class="n">b</span><span class="p">)]</span>
 </pre></div>
 
 </div>
@@ -12201,7 +12192,7 @@ OK
 <div class="output_subarea output_stream output_stderr output_text">
 <pre>.
 ----------------------------------------------------------------------
-Ran 1 test in 0.000s
+Ran 1 test in 0.004s
 
 OK
 </pre>
@@ -12233,10 +12224,7 @@ OK
 <div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># TODO r1 &lt;---&gt; r2</span>
 <span class="c1"># 直接修改参数矩阵，无返回值</span>
 <span class="k">def</span> <span class="nf">swapRows</span><span class="p">(</span><span class="n">M</span><span class="p">,</span> <span class="n">r1</span><span class="p">,</span> <span class="n">r2</span><span class="p">):</span>
-    <span class="n">temp</span> <span class="o">=</span> <span class="n">M</span><span class="p">[</span><span class="n">r1</span><span class="p">]</span>
-    <span class="n">M</span><span class="p">[</span><span class="n">r1</span><span class="p">]</span> <span class="o">=</span> <span class="n">M</span><span class="p">[</span><span class="n">r2</span><span class="p">]</span>
-    <span class="n">M</span><span class="p">[</span><span class="n">r2</span><span class="p">]</span> <span class="o">=</span> <span class="n">temp</span>
-    <span class="k">pass</span>
+    <span class="n">M</span><span class="p">[</span><span class="n">r1</span><span class="p">],</span> <span class="n">M</span><span class="p">[</span><span class="n">r2</span><span class="p">]</span> <span class="o">=</span> <span class="n">M</span><span class="p">[</span><span class="n">r2</span><span class="p">],</span> <span class="n">M</span><span class="p">[</span><span class="n">r1</span><span class="p">]</span>
 </pre></div>
 
 </div>
@@ -12269,7 +12257,7 @@ OK
 <div class="output_subarea output_stream output_stderr output_text">
 <pre>.
 ----------------------------------------------------------------------
-Ran 1 test in 0.000s
+Ran 1 test in 0.002s
 
 OK
 </pre>
@@ -12282,7 +12270,7 @@ OK
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[15]:</div>
+<div class="prompt input_prompt">In&nbsp;[32]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># TODO r1 &lt;--- r1 * scale</span>
@@ -12291,9 +12279,7 @@ OK
 <span class="k">def</span> <span class="nf">scaleRow</span><span class="p">(</span><span class="n">M</span><span class="p">,</span> <span class="n">r</span><span class="p">,</span> <span class="n">scale</span><span class="p">):</span>
     <span class="k">if</span> <span class="p">(</span><span class="n">scale</span> <span class="o">==</span> <span class="mi">0</span><span class="p">):</span>
         <span class="k">raise</span> <span class="ne">ValueError</span>
-    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">M</span><span class="p">[</span><span class="n">r</span><span class="p">])):</span>
-        <span class="n">M</span><span class="p">[</span><span class="n">r</span><span class="p">][</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">M</span><span class="p">[</span><span class="n">r</span><span class="p">][</span><span class="n">i</span><span class="p">]</span> <span class="o">*</span> <span class="n">scale</span>
-    <span class="k">pass</span>
+    <span class="n">M</span><span class="p">[</span><span class="n">r</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span><span class="n">row</span> <span class="o">*</span> <span class="n">scale</span> <span class="k">for</span> <span class="n">row</span> <span class="ow">in</span> <span class="n">M</span><span class="p">[</span><span class="n">r</span><span class="p">]]</span>
 </pre></div>
 
 </div>
@@ -12303,7 +12289,7 @@ OK
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[16]:</div>
+<div class="prompt input_prompt">In&nbsp;[33]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># 运行以下代码测试你的 scaleRow 函数</span>
@@ -12326,7 +12312,7 @@ OK
 <div class="output_subarea output_stream output_stderr output_text">
 <pre>.
 ----------------------------------------------------------------------
-Ran 1 test in 0.000s
+Ran 1 test in 0.003s
 
 OK
 </pre>
@@ -12345,9 +12331,7 @@ OK
 <div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># TODO r1 &lt;--- r1 + r2*scale</span>
 <span class="c1"># 直接修改参数矩阵，无返回值</span>
 <span class="k">def</span> <span class="nf">addScaledRow</span><span class="p">(</span><span class="n">M</span><span class="p">,</span> <span class="n">r1</span><span class="p">,</span> <span class="n">r2</span><span class="p">,</span> <span class="n">scale</span><span class="p">):</span>
-    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">M</span><span class="p">[</span><span class="n">r1</span><span class="p">])):</span>
-        <span class="n">M</span><span class="p">[</span><span class="n">r1</span><span class="p">][</span><span class="n">i</span><span class="p">]</span> <span class="o">+=</span> <span class="n">M</span><span class="p">[</span><span class="n">r2</span><span class="p">][</span><span class="n">i</span><span class="p">]</span> <span class="o">*</span> <span class="n">scale</span>
-    <span class="k">pass</span>
+    <span class="n">M</span><span class="p">[</span><span class="n">r1</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span><span class="n">row1</span> <span class="o">+</span> <span class="n">row2</span> <span class="o">*</span> <span class="n">scale</span> <span class="k">for</span> <span class="n">row1</span><span class="p">,</span> <span class="n">row2</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">M</span><span class="p">[</span><span class="n">r1</span><span class="p">],</span> <span class="n">M</span><span class="p">[</span><span class="n">r2</span><span class="p">])]</span>
 </pre></div>
 
 </div>
@@ -12380,7 +12364,7 @@ OK
 <div class="output_subarea output_stream output_stderr output_text">
 <pre>.
 ----------------------------------------------------------------------
-Ran 1 test in 0.000s
+Ran 1 test in 0.003s
 
 OK
 </pre>
@@ -12696,7 +12680,7 @@ $\begin{bmatrix}
 <div class="output_subarea output_stream output_stderr output_text">
 <pre>.
 ----------------------------------------------------------------------
-Ran 1 test in 2.880s
+Ran 1 test in 2.696s
 
 OK
 </pre>
@@ -12791,10 +12775,10 @@ $</p>
 
 
 
-<div id="6f4b874d-1f7d-4328-b3f6-94386a513d92"></div>
+<div id="34e89860-75d7-4368-8f6d-87c8830d2696"></div>
 <div class="output_subarea output_javascript ">
 <script type="text/javascript">
-var element = $('#6f4b874d-1f7d-4328-b3f6-94386a513d92');
+var element = $('#34e89860-75d7-4368-8f6d-87c8830d2696');
 /* Put everything inside the global mpl namespace */
 window.mpl = {};
 
@@ -13622,10 +13606,10 @@ if (IPython.notebook.kernel != null) {
 
 
 
-<div id="5ef10e89-1870-4e1c-bcc7-281d95dcc475"></div>
+<div id="4a048f60-4823-4cba-b171-fd747ef72d8e"></div>
 <div class="output_subarea output_javascript ">
 <script type="text/javascript">
-var element = $('#5ef10e89-1870-4e1c-bcc7-281d95dcc475');
+var element = $('#4a048f60-4823-4cba-b171-fd747ef72d8e');
 /* Put everything inside the global mpl namespace */
 window.mpl = {};
 
@@ -14442,14 +14426,14 @@ $$</p>
 <div class="prompt input_prompt">In&nbsp;[25]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># TODO 实现以下函数并输出所选直线的MSE</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># DONE 实现以下函数并输出所选直线的MSE</span>
 <span class="k">def</span> <span class="nf">calculateMSE2D</span><span class="p">(</span><span class="n">X</span><span class="p">,</span><span class="n">Y</span><span class="p">,</span><span class="n">m</span><span class="p">,</span><span class="n">b</span><span class="p">):</span>
     <span class="n">n</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
-    <span class="nb">sum</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="n">mse_sum</span> <span class="o">=</span> <span class="mi">0</span>
     <span class="k">for</span> <span class="p">(</span><span class="n">x</span> <span class="p">,</span><span class="n">y</span><span class="p">)</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">Y</span><span class="p">):</span>
         <span class="n">n</span> <span class="o">+=</span> <span class="mi">1</span>
-        <span class="nb">sum</span> <span class="o">+=</span> <span class="nb">pow</span><span class="p">(</span><span class="n">y</span> <span class="o">-</span> <span class="n">m</span><span class="o">*</span><span class="n">x</span> <span class="o">-</span> <span class="n">b</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
-    <span class="k">return</span> <span class="nb">sum</span> <span class="o">/</span> <span class="n">n</span>
+        <span class="n">mse_sum</span> <span class="o">+=</span> <span class="nb">pow</span><span class="p">(</span><span class="n">y</span> <span class="o">-</span> <span class="n">m</span><span class="o">*</span><span class="n">x</span> <span class="o">-</span> <span class="n">b</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">mse_sum</span> <span class="o">/</span> <span class="n">n</span>
 
 <span class="c1"># DONE 检查这里的结果, 如果你上面猜测的直线准确, 这里的输出会在1.5以内</span>
 <span class="nb">print</span><span class="p">(</span><span class="n">calculateMSE2D</span><span class="p">(</span><span class="n">X</span><span class="p">,</span><span class="n">Y</span><span class="p">,</span><span class="n">m1</span><span class="p">,</span><span class="n">b1</span><span class="p">))</span>
@@ -14713,14 +14697,8 @@ $</p>
 <span class="sd">返回：线性回归的系数(如上面所说的 m, b)</span>
 <span class="sd">&#39;&#39;&#39;</span>
 <span class="k">def</span> <span class="nf">linearRegression2D</span><span class="p">(</span><span class="n">X</span><span class="p">,</span><span class="n">Y</span><span class="p">):</span>
-    <span class="n">Y_new</span> <span class="o">=</span> <span class="nb">list</span><span class="p">()</span>
-    <span class="n">Y_new</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">Y</span><span class="p">)</span>
-    <span class="n">Y</span> <span class="o">=</span> <span class="n">transpose</span><span class="p">(</span><span class="n">Y_new</span><span class="p">)</span>
-    <span class="n">X_new</span> <span class="o">=</span> <span class="nb">list</span><span class="p">()</span>
-    <span class="n">X_new</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">X</span><span class="p">)</span>
-    <span class="n">X</span> <span class="o">=</span> <span class="n">transpose</span><span class="p">(</span><span class="n">X_new</span><span class="p">)</span>
-    <span class="n">X_b</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">ones</span><span class="p">(</span><span class="n">shape</span><span class="o">=</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">X</span><span class="p">),</span><span class="mi">1</span><span class="p">),</span><span class="n">dtype</span><span class="o">=</span><span class="nb">int</span><span class="p">)</span>
-    <span class="n">X</span> <span class="o">=</span> <span class="n">augmentMatrix</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">X_b</span><span class="p">)</span>
+    <span class="n">X</span> <span class="o">=</span> <span class="p">[[</span><span class="n">x</span><span class="p">,</span> <span class="mi">1</span><span class="p">]</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">X</span><span class="p">]</span>
+    <span class="n">Y</span> <span class="o">=</span> <span class="p">[[</span><span class="n">y</span><span class="p">]</span> <span class="k">for</span> <span class="n">y</span> <span class="ow">in</span> <span class="n">Y</span><span class="p">]</span>
     <span class="n">X_t</span> <span class="o">=</span> <span class="n">transpose</span><span class="p">(</span><span class="n">X</span><span class="p">)</span>
     <span class="n">A</span> <span class="o">=</span> <span class="n">matxMultiply</span><span class="p">(</span><span class="n">X_t</span><span class="p">,</span> <span class="n">X</span><span class="p">)</span>
     <span class="n">b</span> <span class="o">=</span> <span class="n">matxMultiply</span><span class="p">(</span><span class="n">X_t</span><span class="p">,</span> <span class="n">Y</span><span class="p">)</span>
@@ -14804,10 +14782,10 @@ $</p>
 
 
 
-<div id="bf77d53e-1d7c-4356-81f3-38514ba70eee"></div>
+<div id="ee45ce79-509e-4c7c-8766-f0d998357a7d"></div>
 <div class="output_subarea output_javascript ">
 <script type="text/javascript">
-var element = $('#bf77d53e-1d7c-4356-81f3-38514ba70eee');
+var element = $('#ee45ce79-509e-4c7c-8766-f0d998357a7d');
 /* Put everything inside the global mpl namespace */
 window.mpl = {};
 
@@ -15646,10 +15624,10 @@ if (IPython.notebook.kernel != null) {
 
 
 
-<div id="e8586d14-0a6c-4687-9d43-b36bcbfc5202"></div>
+<div id="b7833ae1-c67c-4dac-a206-274ee4fdbe96"></div>
 <div class="output_subarea output_javascript ">
 <script type="text/javascript">
-var element = $('#e8586d14-0a6c-4687-9d43-b36bcbfc5202');
+var element = $('#b7833ae1-c67c-4dac-a206-274ee4fdbe96');
 /* Put everything inside the global mpl namespace */
 window.mpl = {};
 
@@ -16456,11 +16434,8 @@ if (IPython.notebook.kernel != null) {
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="k">def</span> <span class="nf">linearRegression</span><span class="p">(</span><span class="n">X</span><span class="p">,</span><span class="n">Y</span><span class="p">):</span>
-    <span class="n">Y_new</span> <span class="o">=</span> <span class="nb">list</span><span class="p">()</span>
-    <span class="n">Y_new</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">Y</span><span class="p">)</span>
-    <span class="n">Y</span> <span class="o">=</span> <span class="n">transpose</span><span class="p">(</span><span class="n">Y_new</span><span class="p">)</span>
-    <span class="n">X_b</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">ones</span><span class="p">(</span><span class="n">shape</span><span class="o">=</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">X</span><span class="p">),</span><span class="mi">1</span><span class="p">),</span><span class="n">dtype</span><span class="o">=</span><span class="nb">int</span><span class="p">)</span>
-    <span class="n">X</span> <span class="o">=</span> <span class="n">augmentMatrix</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">X_b</span><span class="p">)</span>
+    <span class="n">X</span> <span class="o">=</span> <span class="p">[[</span><span class="o">*</span><span class="n">x</span><span class="p">,</span> <span class="mi">1</span><span class="p">]</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">X</span><span class="p">]</span>
+    <span class="n">Y</span> <span class="o">=</span> <span class="p">[[</span><span class="n">y</span><span class="p">]</span> <span class="k">for</span> <span class="n">y</span> <span class="ow">in</span> <span class="n">Y</span><span class="p">]</span>
     <span class="n">X_t</span> <span class="o">=</span> <span class="n">transpose</span><span class="p">(</span><span class="n">X</span><span class="p">)</span>
     <span class="n">A</span> <span class="o">=</span> <span class="n">matxMultiply</span><span class="p">(</span><span class="n">X_t</span><span class="p">,</span> <span class="n">X</span><span class="p">)</span>
     <span class="n">b</span> <span class="o">=</span> <span class="n">matxMultiply</span><span class="p">(</span><span class="n">X_t</span><span class="p">,</span> <span class="n">Y</span><span class="p">)</span>
@@ -16498,10 +16473,10 @@ if (IPython.notebook.kernel != null) {
 
 
 
-<div id="e1cb76c8-1882-48fd-8873-413eccf34a48"></div>
+<div id="f088172c-7356-4375-94bf-3ea9c5daf2cb"></div>
 <div class="output_subarea output_javascript ">
 <script type="text/javascript">
-var element = $('#e1cb76c8-1882-48fd-8873-413eccf34a48');
+var element = $('#f088172c-7356-4375-94bf-3ea9c5daf2cb');
 /* Put everything inside the global mpl namespace */
 window.mpl = {};
 

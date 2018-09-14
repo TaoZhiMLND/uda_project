@@ -47,10 +47,10 @@ C = [[1],
      [3]]
 
 #TODO 创建一个 4*4 单位矩阵
-I = [[1,2,3,4], 
-     [2,3,3,5], 
-     [1,2,5,6],
-     [1,3,5,7]]
+I = [[1,0,0,0], 
+     [0,1,0,0], 
+     [0,0,1,0],
+     [0,0,0,1]]
 
 len(tuple(zip(*I)))
 
@@ -100,11 +100,7 @@ get_ipython().run_line_magic('run', '-i -e test.py LinearRegressionTestCase.test
 
 # DONE 计算矩阵的转置
 def transpose(M):
-    a = [[] for i in M[0]]
-    for i in M:
-        for j in range(len(i)):
-            a[j].append(i[j])
-    return a
+    return [list(col) for col in zip(*M)]
 
 
 # In[8]:
@@ -175,12 +171,7 @@ get_ipython().run_line_magic('run', '-i -e test.py LinearRegressionTestCase.test
 
 # TODO 构造增广矩阵，假设A，b行数相同
 def augmentMatrix(A, b):
-    result = list()
-    for i in range(0, shape(A)[0]):
-        row = list(A[i])
-        row.append(b[i][0])
-        result.append(row)
-    return result
+    return [ra + rb for ra, rb in zip(A, b)]
 
 
 # In[12]:
@@ -201,10 +192,7 @@ get_ipython().run_line_magic('run', '-i -e test.py LinearRegressionTestCase.test
 # TODO r1 <---> r2
 # 直接修改参数矩阵，无返回值
 def swapRows(M, r1, r2):
-    temp = M[r1]
-    M[r1] = M[r2]
-    M[r2] = temp
-    pass
+    M[r1], M[r2] = M[r2], M[r1]
 
 
 # In[14]:
@@ -214,7 +202,7 @@ def swapRows(M, r1, r2):
 get_ipython().run_line_magic('run', '-i -e test.py LinearRegressionTestCase.test_swapRows')
 
 
-# In[15]:
+# In[32]:
 
 
 # TODO r1 <--- r1 * scale
@@ -223,12 +211,10 @@ get_ipython().run_line_magic('run', '-i -e test.py LinearRegressionTestCase.test
 def scaleRow(M, r, scale):
     if (scale == 0):
         raise ValueError
-    for i in range(0, len(M[r])):
-        M[r][i] = M[r][i] * scale
-    pass
+    M[r] = [row * scale for row in M[r]]
 
 
-# In[16]:
+# In[33]:
 
 
 # 运行以下代码测试你的 scaleRow 函数
@@ -241,9 +227,7 @@ get_ipython().run_line_magic('run', '-i -e test.py LinearRegressionTestCase.test
 # TODO r1 <--- r1 + r2*scale
 # 直接修改参数矩阵，无返回值
 def addScaledRow(M, r1, r2, scale):
-    for i in range(0, len(M[r1])):
-        M[r1][i] += M[r2][i] * scale
-    pass
+    M[r1] = [row1 + row2 * scale for row1, row2 in zip(M[r1], M[r2])]
 
 
 # In[18]:
@@ -514,14 +498,14 @@ vs_scatter_2d(X, Y, m1, b1)
 # In[25]:
 
 
-# TODO 实现以下函数并输出所选直线的MSE
+# DONE 实现以下函数并输出所选直线的MSE
 def calculateMSE2D(X,Y,m,b):
     n = 0;
-    sum = 0
+    mse_sum = 0
     for (x ,y) in zip(X, Y):
         n += 1
-        sum += pow(y - m*x - b, 2)
-    return sum / n
+        mse_sum += pow(y - m*x - b, 2)
+    return mse_sum / n
 
 # DONE 检查这里的结果, 如果你上面猜测的直线准确, 这里的输出会在1.5以内
 print(calculateMSE2D(X,Y,m1,b1))
@@ -722,14 +706,8 @@ print(calculateMSE2D(X,Y,m1,b1))
 返回：线性回归的系数(如上面所说的 m, b)
 '''
 def linearRegression2D(X,Y):
-    Y_new = list()
-    Y_new.append(Y)
-    Y = transpose(Y_new)
-    X_new = list()
-    X_new.append(X)
-    X = transpose(X_new)
-    X_b = np.ones(shape=(len(X),1),dtype=int)
-    X = augmentMatrix(X, X_b)
+    X = [[x, 1] for x in X]
+    Y = [[y] for y in Y]
     X_t = transpose(X)
     A = matxMultiply(X_t, X)
     b = matxMultiply(X_t, Y)
@@ -776,11 +754,8 @@ vs_scatter_3d(X_3d, Y_3d)
 
 
 def linearRegression(X,Y):
-    Y_new = list()
-    Y_new.append(Y)
-    Y = transpose(Y_new)
-    X_b = np.ones(shape=(len(X),1),dtype=int)
-    X = augmentMatrix(X, X_b)
+    X = [[*x, 1] for x in X]
+    Y = [[y] for y in Y]
     X_t = transpose(X)
     A = matxMultiply(X_t, X)
     b = matxMultiply(X_t, Y)
