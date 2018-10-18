@@ -3,9 +3,6 @@ from PIL import Image
 import numpy as np
 
 def process_image(image):
-    ''' Scales, crops, and normalizes a PIL image for a PyTorch model,
-        returns an Numpy array
-    '''
     image = Image.open(image)
     width, height = image.size
     
