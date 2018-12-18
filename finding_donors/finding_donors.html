@@ -12620,8 +12620,6 @@ Testing set has 9045 samples.
     
     <span class="c1"># TODO：计算预测用时</span>
     <span class="n">results</span><span class="p">[</span><span class="s1">&#39;pred_time&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">end</span> <span class="o">-</span> <span class="n">start</span>
-    
-    <span class="nb">print</span><span class="p">(</span><span class="n">y_train</span><span class="p">[:</span><span class="mi">300</span><span class="p">]</span> <span class="o">==</span> <span class="n">predictions_train</span><span class="p">)</span>
             
     <span class="c1"># TODO：计算在最前面的300个训练数据的准确率</span>
     <span class="n">results</span><span class="p">[</span><span class="s1">&#39;acc_train&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">accuracy_score</span><span class="p">(</span><span class="n">y_train</span><span class="p">[:</span><span class="mi">300</span><span class="p">],</span> <span class="n">predictions_train</span><span class="p">)</span>
@@ -13369,7 +13367,8 @@ SVC trained on 28941 samples.
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p><strong>回答： </strong><br>
-最终模型通过人口普查数据集中年收入超过50k的人的特点，训练出了能预测被调查人收入是否超过50k的能力。当获得一个被调查人的基本信息时，我们通过预测他(她)的年收入是否超过50k，如果超过，那么他(她)将可以作为潜在的捐助者被发送邮件。</p>
+   <code>SVM</code>在训练过程中，如果数据线性可分，那么我们尽量找到一条直线，使所有数据跟直线之间的距离最远。当数据线性不可分时，<code>SVM</code>就是要找到最合适的分类平面，使得分隔的两边数据距离平面间隔最大。
+   最终模型通过人口普查数据集中年收入超过50k的人的特点，训练出了能预测被调查人收入是否超过50k的能力。当获得一个被调查人的基本信息时，我们通过预测他(她)的年收入是否超过50k，如果超过，那么他(她)将可以作为潜在的捐助者被发送邮件。</p>
 
 </div>
 </div>
@@ -13564,7 +13563,8 @@ Final F-score on the validation data: 0.7056
 <li>特征2:<code>education_level</code>教育经历越高，年收入更可能大于50k  </li>
 <li>特征3:<code>workclass</code>劳动类型对年收入会有较大影响，比如无业或无报酬，年收入也许无法超过50k    </li>
 <li>特征4:<code>occupation</code>职业领域对年收入会有较大影响， 高薪职业的收入更可能大于50k   </li>
-<li>特征5:<code>age</code>某年龄区段内可能年收入更多</li>
+<li>特征5:<code>age</code>某年龄区段内可能年收入更多<br>
+特征重要性：<code>capital-gain</code>&gt;<code>education_level</code>&gt;<code>workclass</code>&gt;<code>occupation</code>&gt;<code>age</code></li>
 </ul>
 
 </div>
